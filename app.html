@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+  <link rel="stylesheet" type="text/css"
+    href="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+  <script type="text/javascript" charset="UTF-8"
+    src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+  <script type="text/javascript" charset="UTF-8"
+    src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+  <script type="text/javascript" charset="UTF-8"
+    src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+  <script type="text/javascript" charset="UTF-8"
+    src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+
+</head>
+<body>
+  <form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload"> <br>
+    Enter image location:
+    <input type="text" name="imageloc">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+  <div id="map" style="width: 100%; height: 600px; background: grey" />
+  <script  type="text/javascript" charset="UTF-8" >
+    
+var createImgMarkerIcon = function (map) {
+            var img = document.createElement("img");
+            img.src = "/hackathon/".concat("uploads/SD1.jpg"); 
+            return new H.map.Icon(img, {
+                anchor: { x: 50, y: 50 }
+            });
+        };
+
+        var createImgMarkerIconn = function (map) {
+            var img = document.createElement("img");
+            img.src = "/hackathon/".concat("uploads/Florence3.jpg"); 
+            return new H.map.Icon(img, {
+                anchor: { x: 50, y: 50 }
+            });
+        };
+
+        var createImgMarkerIconnn = function (map) {
+            var img = document.createElement("img");
+            img.src = "/hackathon/".concat("uploads/equador.jpg"); 
+            return new H.map.Icon(img, {
+                anchor: { x: 50, y: 50 }
+            });
+        };
+
+//Step 1: initialize communication with the platform
+var platform = new H.service.Platform({
+  app_id: 'pQyv8E5qcLonjx2zWKkX',
+  app_code: 'VBocmx5CtYv1JTPfP8S1Vw',
+  useCIT: true,
+  useHTTPS: true
+});
+var defaultLayers = platform.createDefaultLayers();
+
+//Step 2: initialize a map - this map is centered over Chicago.
+var map = new H.Map(document.getElementById('map'),
+  defaultLayers.normal.map,{
+  center: {lat:32.8, lng:-117.3},
+  zoom: 5
+});
+
+//Step 3: make the map interactive
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+// Create the default UI components
+  var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+// Now use the map as required...
+  SD = new H.geo.Point(32.72, -117.16);
+  Sydney = new H.geo.Point(-33.9, 151.12);
+  Ant = new H.geo.Point(-90, 0);
+  NY = new H.geo.Point(40.7, 74);
+  Bukoba = new H.geo.Point(-1.33, -31.8);
+  Flor= new H.geo.Point(43.8, -11.25);
+  Equa = new H.geo.Point(-.15, 78.35);
+
+  marker = new H.map.Marker(SD,
+            {
+                icon: createImgMarkerIcon()
+            });
+        map.addObject(marker);
+
+  markerr = new H.map.Marker(Flor,
+            {
+                icon: createImgMarkerIconn()
+            });
+        map.addObject(markerr);
+    markerrr = new H.map.Marker(Equa,
+            {
+                icon: createImgMarkerIconnn()
+            });
+        map.addObject(markerrr);
+      
+
+map.setCenter(new H.geo.Point(32.8, -117.3)); 
+
+/*
+    new nokia.maps.map.component.ZoomBar(), 
+    new nokia.maps.map.component.Behavior(),
+    new nokia.maps.map.component.TypeSelector(),
+    new nokia.maps.map.component.Traffic(),
+    new nokia.maps.map.component.PublicTransport(),
+    new nokia.maps.map.component.DistanceMeasurement(),
+    new nokia.maps.map.component.Overview(),
+    new nokia.maps.map.component.ScaleBar(),
+    new nokia.maps.positioning.component.Positioning(),
+    new nokia.maps.map.component.ContextMenu(),
+    new nokia.maps.map.component.ZoomRectangle(),
+    new nokia.maps.map.component.TrafficIncidents()
+*/
+  </script>
+</body>
+</html>
